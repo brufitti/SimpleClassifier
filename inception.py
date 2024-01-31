@@ -15,12 +15,14 @@ class Inception(nn.Module):
         
         self.conv_3x3 = nn.Sequential(
             nn.Conv2d(in_channels=channels_in, out_channels=channels_3x3[0], kernel_size=1, stride=1),
+            nn.ReLU(),
             nn.Conv2d(in_channels=channels_3x3[0], out_channels=channels_3x3[1], kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
         )
         
         self.conv_5x5_equivalent = nn.Sequential(
             nn.Conv2d(in_channels=channels_in, out_channels=channels_5x5[0], kernel_size=1, stride=1),
+            nn.ReLU(),
             nn.Conv2d(in_channels=channels_5x5[0], out_channels=channels_5x5[1], kernel_size=3, stride=1, padding=1),
             nn.Conv2d(in_channels=channels_5x5[1], out_channels=channels_5x5[2], kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
@@ -28,6 +30,7 @@ class Inception(nn.Module):
         
         self.pool = nn.Sequential(
             nn.MaxPool2d(kernel_size=3, stride=1, padding=1),
+            nn.ReLU(),
             nn.Conv2d(in_channels=channels_in, out_channels=channels_pool, kernel_size=1, stride=1),
             nn.ReLU(),
         )
